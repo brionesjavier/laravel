@@ -1,0 +1,14 @@
+
+//crear proyecto laravel
+
+composer create-project laravel/laravel example-app
+
+//iniciar servidor del proyecto
+ingresar a la carpeta y ejecutar el comando
+
+cd example-app
+ 
+php artisan serve
+
+//configurar base de datos en
+.env
