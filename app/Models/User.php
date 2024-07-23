@@ -50,4 +50,16 @@ class User extends Authenticatable
     {
         return $this->hasMany(Ticket::class);
     }
+
+    public function ideas(): HasMany
+    {
+        return $this->hasMany(Idea::Class);
+    }
+
+    public function ideasLiked(): BelongsToMany
+    {
+        return $this->belongsToMany(Idea::class);
+    }
+}
+
 }
