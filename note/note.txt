@@ -12,3 +12,28 @@ php artisan serve
 
 //configurar base de datos en
 .env
+
+//hacer migracion crear tabla
+php artisan make:migration create_tickets_table 
+
+//hacer migracion de tabla
+php artisan migrate
+
+//volver a la migracion anterior
+php artisan migrate:rollback
+
+//crer modelo 
+php artisan make:model User
+
+//elimina la tabla y la vuelve a generar
+php artisan migrate:refresh 
+
+//se manejara autenticacion y se instalara  breeze
+composer require laravel/breeze --dev
+
+//para que es php artisan
+php artisan breeze:install
+
+//siguiente
+php artisan migrate
+
