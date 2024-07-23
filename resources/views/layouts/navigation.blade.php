@@ -16,10 +16,19 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+
+        
+
                 {{-- link tickets --}}
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('ticket.index')" :active="request()->routeIs('ticket.index')">
                        {{--  {{ __('Dashboard') }} --}}Tickets
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('idea.index')" :active="request()->routeIs('idea.index')">
+                       {{--  {{ __('Dashboard') }} --}}Ideas
                     </x-nav-link>
                 </div>
                 
@@ -79,9 +88,17 @@
             </x-responsive-nav-link>
         </div>
 
+       
+
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('ticket.index')" :active="request()->routeIs('ticket.index')">
                 {{-- {{ __('Dashboard') }} --}}Tickets
+            </x-responsive-nav-link>
+        </div>
+
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('idea.index')" :active="request()->routeIs('idea.index')">
+                {{-- {{ __('Dashboard') }} --}}Ideas
             </x-responsive-nav-link>
         </div>
 

@@ -20,8 +20,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/ticket', [TicketController::class, 'index'] )->name('ticket.index') ;
-Route::get('/ideas', [IdeaController::class, 'index'])->name('idea.index');
+
 
 
 require __DIR__.'/auth.php';
+Route::get('/ticket', [TicketController::class, 'index'] )->name('ticket.index') ;
+Route::get('/ideas', [IdeaController::class, 'index'])->name('idea.index');

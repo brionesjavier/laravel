@@ -10,8 +10,8 @@ class TicketController extends Controller
     //
     public function index(){
 
-        $tickets= DB::tabla('tickets')->all();//SELECT * FROM tickets
-        return view('tickets.index',['tickets'=>$tickets]);
+        //$tickets= DB::tabla('tickets')->all();//SELECT * FROM tickets
+        return view('tickets.index'/* ,['tickets'=>$tickets] */);
 
     }
 }
