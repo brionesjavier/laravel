@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TicketController;
+use App\Http\Controllers\IdeaController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -19,6 +21,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/ticket', [TicketController::class, 'index'] )->name('ticket.index') ;
+Route::get('/ideas', [IdeaController::class, 'index'])->name('idea.index');
 
 
 require __DIR__.'/auth.php';
