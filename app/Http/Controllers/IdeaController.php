@@ -14,7 +14,8 @@ class IdeaController extends Controller
     //
     public function index(): View
     {
-        $ideas= DB::table('ideas')->get();//select * from ideas
+        //$ideas= DB::table('ideas')->get();//select * from ideas
+        $ideas= Idea::get();
 
 
         return view('ideas.index',['ideas' =>$ideas]);
@@ -32,8 +33,9 @@ class IdeaController extends Controller
         ]);
 
         Idea::create([
+
             'user_id' => $request->user()->id,
-            'description' => $validated['title'],
+            'title' => $validated['title'],
             'description' => $validated['description'],
             
         ]);

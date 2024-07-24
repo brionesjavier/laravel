@@ -11,6 +11,7 @@ class Idea extends Model
 {
     use HasFactory;
     protected $fillable = [ 'user_id', 'title', 'description',];
+    protected $casts = ['created_at' => 'datetime'];
 
 
     public function user(): BelongsTo
