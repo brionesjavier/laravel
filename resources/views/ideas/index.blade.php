@@ -45,10 +45,10 @@
                                         <x-dropdown-link :href="route('idea.edit', $idea)">
                                             Editar
                                         </x-dropdown-link>
-                                        <form method="POST" action="">
+                                        <form method="POST" action="{{ route('idea.destroy',$idea) }}">
                                             @csrf
                                             @method('delete')
-                                            <x-dropdown-link :href="$myroute='zzz'" onclick="event.preventDefault(); this.closest('form').submit();">
+                                            <x-dropdown-link href="{{ route('idea.destroy',$idea) }}" onclick="event.preventDefault(); this.closest('form').submit();">
                                                 Eliminar
                                             </x-dropdown-link>
                                         </form>

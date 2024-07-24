@@ -53,7 +53,7 @@ class IdeaController extends Controller
         return view('ideas.edit')->with('idea',$idea);
     }
 
-    public function update(Request $request,Idea $idea):RedirectResponse
+    public function update(Request $request,Idea $idea): RedirectResponse
     {
         $validated = $request->validate([
             'title' => 'required|string|max:100',
@@ -68,6 +68,13 @@ class IdeaController extends Controller
     {
         return view('ideas.show')->with('idea',$idea);
        // return view('ideas.create');
+    }
+
+    public function destroy(Idea $idea): RedirectResponse
+    {
+        $idea->delete();
+        return redirect()->route('idea.index');
+
     }
 
     
