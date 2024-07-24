@@ -12,22 +12,24 @@ use Illuminate\View\View;
 
 class IdeaController extends Controller
 {
-    //
+    // /* ----------------select * from table ---------------- */
     public function index(): View
     {
         //$ideas= DB::table('ideas')->get();//select * from ideas
-        $ideas= Idea::get();
+        $ideas = Idea::get();
 
+        return view('ideas.index', ['ideas' => $ideas]);
 
-        return view('ideas.index',['ideas' =>$ideas]);
-        //return view('ideas.index').with([['ideas' =>$ideas]]);
     }
 
-    public function create(): View{
+    public function create(): View
+    {
+        
         return view('ideas.create');
     }
 
-    public function store(Request $request):RedirectResponse
+ /* --------------insert into table (column) values (value); -------------- */
+    public function store(Request $request): RedirectResponse
     {
 
         $validated = $request->validate([
@@ -40,42 +42,45 @@ class IdeaController extends Controller
             'user_id' => $request->user()->id,
             'title' => $validated['title'],
             'description' => $validated['description'],
-            
+
         ]);
 
-       // dd($request->all());
+        session()->flash('message', 'Idea creada correctamente!');
+        // dd($request->all());
         return redirect()->route('idea.index');
     }
 
-    public function edit(Idea $idea):View
+    public function edit(Idea $idea): View
     {
 
-        return view('ideas.edit')->with('idea',$idea);
+        return view('ideas.edit')->with('idea', $idea);
     }
 
-    public function update(Request $request,Idea $idea): RedirectResponse
+     /* -------update table set (column = value ) where id = ?------- */
+    public function update(Request $request, Idea $idea): RedirectResponse
     {
         $validated = $request->validate([
             'title' => 'required|string|max:100',
             'description' => 'required|string|max:300',
         ]);
-
+        
         $idea->update($validated);
+        session()->flash('message', 'Idea actualizada correctamente!');
         return redirect()->route('idea.index');
     }
 
+     /* --------------select * from table where id = ? -------------- */
     public function show(Idea $idea): View
     {
-        return view('ideas.show')->with('idea',$idea);
-       // return view('ideas.create');
+        return view('ideas.show')->with('idea', $idea);
+        // return view('ideas.create');
     }
 
+    /* --------------delete from table  where id = ? -------------- */
     public function destroy(Idea $idea): RedirectResponse
     {
         $idea->delete();
+        session()->flash('message', 'Idea eliminada correctamente!');
         return redirect()->route('idea.index');
-
     }
-
-    
 }
