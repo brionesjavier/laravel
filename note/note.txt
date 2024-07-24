@@ -37,3 +37,6 @@ php artisan breeze:install
 //siguiente
 php artisan migrate
 
+//comando para agrgar todos los metodos crud
+ php artisan make:controlller CategorieController --resource
+
