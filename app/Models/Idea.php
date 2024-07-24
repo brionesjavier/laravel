@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Idea extends Model
 {
     use HasFactory;
-    protected $fillable = [ 'user_id', 'title', 'description',];
+    protected $fillable = [ 'user_id', 'title', 'description','likes'];
     protected $casts = ['created_at' => 'datetime'];
 
 

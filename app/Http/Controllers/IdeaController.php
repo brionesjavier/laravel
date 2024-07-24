@@ -93,4 +93,20 @@ class IdeaController extends Controller
         session()->flash('message', 'Idea eliminada correctamente!');
         return redirect()->route('idea.index');
     }
+
+    public function synchronizeLikes(Request $request,Idea $idea): RedirectResponse
+    {
+        
+        $request->user()->ideasLiked()->toggle([$idea->id]);//usuario puede dar muchos like
+
+       // $auth()->use()->ideasLiked()->toggle([$idea->id]);
+        //$idea->users()->toggle([$request->user()->id]); //idea tiene muchos usuario
+        
+        //$idea->users()->count();
+
+        $idea->update(['likes'=>$idea->users()->count()]);
+
+        return redirect()->route('idea.show', $idea);
+
+    }
 }

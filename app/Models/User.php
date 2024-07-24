@@ -65,6 +65,11 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Idea::class);
     }
+
+    public function iLikeIt($ideaId){
+        return $this->ideasLiked()->where('idea_id', $ideaId)->exists();
+
+    }
 }
 
 
