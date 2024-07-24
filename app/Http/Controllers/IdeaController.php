@@ -7,7 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
-
+use Illuminate\Support\Facades\Gate;
 
 
 class IdeaController extends Controller
@@ -65,13 +65,14 @@ class IdeaController extends Controller
 
     public function edit(Idea $idea): View
     {
-
+        Gate::authorize('update',$idea);
         return view('ideas.edit')->with('idea', $idea);
     }
 
      /* -------update table set (column = value ) where id = ?------- */
     public function update(Request $request, Idea $idea): RedirectResponse
     {
+        Gate::authorize('update',$idea);
         $validated = $request->validate($this->rule, $this->errorMessages);
         
         $idea->update($validated);
@@ -89,6 +90,7 @@ class IdeaController extends Controller
     /* --------------delete from table  where id = ? -------------- */
     public function destroy(Idea $idea): RedirectResponse
     {
+        Gate::authorize('delete',$idea);
         $idea->delete();
         session()->flash('message', 'Idea eliminada correctamente!');
         return redirect()->route('idea.index');
