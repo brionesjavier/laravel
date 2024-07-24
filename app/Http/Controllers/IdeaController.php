@@ -12,6 +12,22 @@ use Illuminate\View\View;
 
 class IdeaController extends Controller
 {
+
+    private array $rule=[
+            'title' => 'required|string|max:100',
+            'description' => 'required|string|max:300',
+
+    ];
+
+    private array $errorMessages=[
+        'title.required' => 'El campo Titulo es obligatorio',
+        'description.required' => 'El campo Descripcion es obligatorio',
+        'string' => 'Este campo debe sser del tipo String',
+        'title.max' => 'El campo Titulo no debe ser mayor  a :max caracteres',
+        'description.max' => 'El campo Descripcion no debe ser mayor  a :max caracteres',
+];
+
+
     // /* ----------------select * from table ---------------- */
     public function index(): View
     {
@@ -32,10 +48,7 @@ class IdeaController extends Controller
     public function store(Request $request): RedirectResponse
     {
 
-        $validated = $request->validate([
-            'title' => 'required|string|max:100',
-            'description' => 'required|string|max:300',
-        ]);
+        $validated = $request->validate($this->rule, $this->errorMessages);
 
         Idea::create([
 
@@ -59,10 +72,7 @@ class IdeaController extends Controller
      /* -------update table set (column = value ) where id = ?------- */
     public function update(Request $request, Idea $idea): RedirectResponse
     {
-        $validated = $request->validate([
-            'title' => 'required|string|max:100',
-            'description' => 'required|string|max:300',
-        ]);
+        $validated = $request->validate($this->rule, $this->errorMessages);
         
         $idea->update($validated);
         session()->flash('message', 'Idea actualizada correctamente!');
