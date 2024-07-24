@@ -13,10 +13,9 @@ return new class extends Migration
     {
         Schema::create('ideas', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
             $table->string('title');
             $table->text('description');
-            $table->unsignedBigInteger('likes');
+            $table->unsignedBigInteger('likes')->default(0);
             $table->timestamps();
         });
     }
