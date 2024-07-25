@@ -29,14 +29,15 @@ class IdeaController extends Controller
 
 
     // /* ----------------select * from table ---------------- */
-    public function index(): View
+    public function index(Request $request): View
     {
         //$ideas= DB::table('ideas')->get();//select * from ideas
-        $ideas = Idea::get();
-
+        $ideas = Idea::myIdeas($request->filtro)->theBest($request->filtro)->get();
+        
         return view('ideas.index', ['ideas' => $ideas]);
 
     }
+
 
     public function create(): View
     {

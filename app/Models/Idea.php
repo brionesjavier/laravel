@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Builder;
 
 class Idea extends Model
 {
@@ -23,4 +24,21 @@ class Idea extends Model
     {
         return $this->belongsToMany(User::class);
     }
+
+    public function scopeMyIdeas(Builder $query, $filter): void
+    {
+        if (!empty($filter) && $filter == 'mis-ideas') {
+            $query->where('user_id', auth()->id());
+        }
+    }
+
+    public function scopeTheBest(Builder $query, $filter): void
+    {
+        if (!empty($filter) && $filter == 'las-mejores') {
+            $query->orderBy('likes', 'desc');
+        }
+    }
+       
+
+    
 }
