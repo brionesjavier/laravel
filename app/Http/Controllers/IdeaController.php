@@ -32,7 +32,7 @@ class IdeaController extends Controller
     public function index(Request $request): View
     {
         //$ideas= DB::table('ideas')->get();//select * from ideas
-        $ideas = Idea::myIdeas($request->filtro)->theBest($request->filtro)->get();
+        $ideas = Idea::myIdeas($request->filtro)->theBest($request->filtro)->get();//filtro
         
         return view('ideas.index', ['ideas' => $ideas]);
 
@@ -99,7 +99,8 @@ class IdeaController extends Controller
 
     public function synchronizeLikes(Request $request,Idea $idea): RedirectResponse
     {
-        
+        $this->authoriza('updateLikes', $idea);
+
         $request->user()->ideasLiked()->toggle([$idea->id]);//usuario puede dar muchos like
 
        // $auth()->use()->ideasLiked()->toggle([$idea->id]);
